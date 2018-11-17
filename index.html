@@ -309,101 +309,17 @@
 
       
         
-          
-            <h2 id="环境："><a href="#环境：" class="headerlink" title="环境："></a>环境：</h2><ul>
-<li><p>Python: 3.6</p>
-</li>
-<li><p>Django: 2.1</p>
-</li>
-<li><p>OS: CentOS 7 x86_64</p>
-</li>
-<li><p>uwsgi: 2.0.17</p>
-</li>
-</ul>
-<h2 id="安装Python3-6"><a href="#安装Python3-6" class="headerlink" title="安装Python3.6"></a>安装Python3.6</h2><ul>
-<li>不要删除自带的python2.7，否则会出问题，因为centos许多软件需要依赖系统自带python</li>
-<li><p>安装依赖工具 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install openssl-devel bzip2-devel expat-devel gdbm-devel readline-devel sqlite-devel mysql-devel gcc gcc-devel python-devel</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下载 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tgz</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>解压 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf Python-3.6.5.tgz</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>移动至规范的放软件的目录下 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv Python-3.6.5 /usr/local</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/Python-3.6.5/</span><br><span class="line">./configure</span><br><span class="line">make </span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>验证</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -V</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h2><ul>
-<li>配置源<br>  vi /etc/yum.repos.d/nginx.repo 添加下面内容  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[nginx]</span><br><span class="line">name=nginx repo</span><br><span class="line">baseurl=http://nginx.org/packages/mainline/centos/<span class="number">7</span>/x86_64/</span><br><span class="line">gpgcheck=<span class="number">0</span>		<span class="comment">#gpkcheck=0 表示对从这个源下载的rpm包不进行校验；</span></span><br><span class="line">enabled=<span class="number">1</span>		<span class="comment">#enable=1 表示启用这个源。</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>yum install nginx</li>
-<li>启动nginx：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx</span><br><span class="line"><span class="comment">#直接访问http://ip:80 能看到nginx的欢迎界面即可。</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="创建python3虚拟环境"><a href="#创建python3虚拟环境" class="headerlink" title="创建python3虚拟环境"></a>创建python3虚拟环境</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m venv /home/个人目录/虚拟环境名称</span><br></pre></td></tr></table></figure>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置:"></a>配置:</h2><h3 id="安装项目所需的各种包"><a href="#安装项目所需的各种包" class="headerlink" title="安装项目所需的各种包"></a>安装项目所需的各种包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">source /home/个人目录/虚拟环境名称/bin/activate   #进入虚拟环境</span><br><span class="line">yum  -y install mariadb-server.x86_64</span><br><span class="line">pip install Django==2.1.2</span><br><span class="line">django-haystack==2.8.1</span><br><span class="line">mysqlclient==1.3.13</span><br><span class="line">pytz==2018.5</span><br><span class="line">uWSGI==2.0.17.1</span><br><span class="line">Whoosh==2.7.4</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<h3 id="安装uWSGI"><a href="#安装uWSGI" class="headerlink" title="安装uWSGI"></a>安装uWSGI</h3><ul>
-<li>安装 pip install uwsgi </li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验证 </span></span><br><span class="line">vim test.py</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">application</span><span class="params">(env, start_response)</span>:</span></span><br><span class="line">    start_response(<span class="string">'200 OK'</span>;, [(<span class="string">'Content-Type'</span>;,<span class="string">'text/html'</span>)])</span><br><span class="line">    <span class="keyword">return</span> [<span class="string">b"Hello Django"</span>]</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --http :<span class="number">8001</span> --wsgi-file test.py</span><br></pre></td></tr></table></figure>
-<p>浏览器访问，网页能显示 Hello Django 那么就没问题</p>
-<ul>
-<li>如果安装失败</li>
-<li>deactivate 退出虚拟环境</li>
-<li>yum install -y python-devel </li>
-<li>easy_install uwsgi</li>
-</ul>
-<h3 id="配置django项目"><a href="#配置django项目" class="headerlink" title="配置django项目"></a>配置django项目</h3><ul>
-<li><p>将项目复制到服务器上</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r 项目文件夹 用户名<span class="meta">@ip</span>:/home/个人目录</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改django项目的settings.py文件</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">DEBUG = FALSE;  # 关闭调试模式</span><br><span class="line"></span><br><span class="line">ALLOWED_HOSTS = ["*"]  # 允许访问的主机</span><br><span class="line"></span><br><span class="line"># mysql数据库配置</span><br><span class="line">DATABASES = &#123;</span><br><span class="line"></span><br><span class="line">    <span class="string">'default'</span>: &#123;</span><br><span class="line"></span><br><span class="line">        <span class="string">'ENGINE'</span>: <span class="string">'django.db.backends.mysql'</span>,</span><br><span class="line"></span><br><span class="line">        <span class="string">'NAME'</span>: <span class="string">'fresh'</span>,</span><br><span class="line"></span><br><span class="line">        'HOST':'localhost',  #数据库服务器的地址</span><br><span class="line"></span><br><span class="line">        <span class="string">'USER'</span>:<span class="string">'root'</span>,</span><br><span class="line"></span><br><span class="line">        <span class="string">'PASSWORD'</span>:<span class="string">'123456'</span>,</span><br><span class="line"></span><br><span class="line">        <span class="string">'PORT'</span>:<span class="number">3306</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 静态资源配置</span><br><span class="line">STATIC_URL = '/static/'   # 默认</span><br><span class="line"></span><br><span class="line"># STATIC_ROOT用于收集项目下静态资源,STATICFILES_DIRS和STATIC_ROOT不能共存,注销STATICFILES_DIRS</span><br><span class="line">#STATICFILES_DIRS = [</span><br><span class="line">#     os.path.join(BASE_DIR,'static')</span><br><span class="line"># ]</span><br><span class="line"></span><br><span class="line">STATIC_ROOT = os.path.join(BASE_DIR, <span class="string">"static/"</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>收集静态文件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python manage.py collectstatic</span><br><span class="line"><span class="comment">#执行之后会在static文件夹下生成一个admin文件夹</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="配置uwsgi"><a href="#配置uwsgi" class="headerlink" title="配置uwsgi"></a>配置uwsgi</h3><ul>
-<li>进入项目文件夹下,配置uwsgi启动django的参数<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">vim django_uwsgi.ini</span><br><span class="line"></span><br><span class="line">[uwsgi]</span><br><span class="line"># 通过uwsgi访问django需要配置成http</span><br><span class="line"># 通过nginx请求uwsgi来访问django 需要配置成socket</span><br><span class="line"># 9000 是django的端口号</span><br><span class="line">socket = :<span class="number">9000</span></span><br><span class="line"># web项目根目录</span><br><span class="line">chdir = /home/root/pydj/django_one</span><br><span class="line"># module指定项目自带的的wsgi配置文件位置</span><br><span class="line"><span class="keyword">module</span> = django_one.wsgi</span><br><span class="line"># 允许存在主进程</span><br><span class="line">master = <span class="keyword">true</span></span><br><span class="line"># 开启进程数量</span><br><span class="line">processes = <span class="number">3</span></span><br><span class="line"># 服务器退出时自动清理环境</span><br><span class="line">vacuum = <span class="keyword">true</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="配置nginx"><a href="#配置nginx" class="headerlink" title="配置nginx"></a>配置nginx</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/nginx/nginx.conf</span><br><span class="line"></span><br><span class="line">user root;  # 以root用户启动nginx,否则可能会因为权限问题而丢失所有样式</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nginx/conf.d/fresh.conf</span><br><span class="line"></span><br><span class="line"># 在/etc/nginx/conf.d/路径下新建一个conf文件，建议与项目同名，在里面添加下面内容</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen       <span class="number">8089</span>;</span><br><span class="line">    listen      [::]:<span class="number">8089</span>;</span><br><span class="line">    server_name <span class="number">127.0</span>.0.1 <span class="number">192.168</span>.10.114; </span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        include /etc/nginx/uwsgi_params;</span><br><span class="line">        uwsgi_pass <span class="number">127.0</span>.0.1:<span class="number">9000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    location /<span class="keyword">static</span>&#123;</span><br><span class="line">        alias /home/dajngo项目静态文件夹路径;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>8089 是对外的端口号</li>
-<li>server_name nginx代理uwsgi对外的ip</li>
-<li>127.0.0.1:9000 即当nginx收到8089端口的请求时，直接将请求转发给 127.0.0.1:9000</li>
-</ul>
-<h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><ul>
-<li><p>关闭防火墙</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld.service</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重启nginx</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx <span class="comment"># 每次修改nginx配置文件都需要重启nginx</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置selinux临时关闭,</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenforce <span class="number">0</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动项目</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --ini django_uwsgi.ini</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-          
+          <p>本篇博客讲述如何在linux服务器上部署django项目<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/17/Centos7下部署Django-uWSGI-Nginx/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
-    </div>
+    </p></div>
     
     
     
@@ -493,7 +409,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
