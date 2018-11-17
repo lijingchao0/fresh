@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="部署,django,uwsgi,nginx,">
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="李靖超的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="环境： Python: 3.6  Django: 2.1  OS: CentOS 7 x86_64  uwsgi: 2.0.17   安装Python3.6 不要删除自带的python2.7，否则会出问题，因为centos许多软件需要依赖系统自带python 安装依赖工具  1yum install openssl-devel bzip2-devel expat-devel gdbm-devel">
+<meta name="keywords" content="部署,django,uwsgi,nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos7下部署Django+uWSGI+Nginx">
+<meta property="og:url" content="http://yoursite.com/2018/11/17/Centos7下部署Django-uWSGI-Nginx/index.html">
 <meta property="og:site_name" content="李靖超的博客">
+<meta property="og:description" content="环境： Python: 3.6  Django: 2.1  OS: CentOS 7 x86_64  uwsgi: 2.0.17   安装Python3.6 不要删除自带的python2.7，否则会出问题，因为centos许多软件需要依赖系统自带python 安装依赖工具  1yum install openssl-devel bzip2-devel expat-devel gdbm-devel">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-17T12:51:05.128Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="李靖超的博客">
+<meta name="twitter:title" content="Centos7下部署Django+uWSGI+Nginx">
+<meta name="twitter:description" content="环境： Python: 3.6  Django: 2.1  OS: CentOS 7 x86_64  uwsgi: 2.0.17   安装Python3.6 不要删除自带的python2.7，否则会出问题，因为centos许多软件需要依赖系统自带python 安装依赖工具  1yum install openssl-devel bzip2-devel expat-devel gdbm-devel">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/17/Centos7下部署Django-uWSGI-Nginx/">
 
 
 
 
 
-  <title>李靖超的博客</title>
+  <title>Centos7下部署Django+uWSGI+Nginx | 李靖超的博客</title>
   
 
 
@@ -140,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -224,9 +228,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -256,9 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/17/Centos7下部署Django-uWSGI-Nginx/" itemprop="url">Centos7下部署Django+uWSGI+Nginx</a></h1>
+          <h1 class="post-title" itemprop="name headline">Centos7下部署Django+uWSGI+Nginx</h1>
         
 
         <div class="post-meta">
@@ -308,9 +310,7 @@
       
 
       
-        
-          
-            <h2 id="环境："><a href="#环境：" class="headerlink" title="环境："></a>环境：</h2><ul>
+        <h2 id="环境："><a href="#环境：" class="headerlink" title="环境："></a>环境：</h2><ul>
 <li><p>Python: 3.6</p>
 </li>
 <li><p>Django: 2.1</p>
@@ -400,8 +400,6 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --ini django_uwsgi.ini</span><br></pre></td></tr></table></figure></li>
 </ul>
 
-          
-        
       
     </div>
     
@@ -416,14 +414,26 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/部署/" rel="tag"># 部署</a>
+          
+            <a href="/tags/django/" rel="tag"># django</a>
+          
+            <a href="/tags/uwsgi/" rel="tag"># uwsgi</a>
+          
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -433,10 +443,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -444,6 +455,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -464,8 +479,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -526,6 +550,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境："><span class="nav-number">1.</span> <span class="nav-text">环境：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Python3-6"><span class="nav-number">2.</span> <span class="nav-text">安装Python3.6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Nginx"><span class="nav-number">3.</span> <span class="nav-text">安装Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建python3虚拟环境"><span class="nav-number">4.</span> <span class="nav-text">创建python3虚拟环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">5.</span> <span class="nav-text">配置:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装项目所需的各种包"><span class="nav-number">5.1.</span> <span class="nav-text">安装项目所需的各种包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装uWSGI"><span class="nav-number">5.2.</span> <span class="nav-text">安装uWSGI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置django项目"><span class="nav-number">5.3.</span> <span class="nav-text">配置django项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置uwsgi"><span class="nav-number">5.4.</span> <span class="nav-text">配置uwsgi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置nginx"><span class="nav-number">5.5.</span> <span class="nav-text">配置nginx</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动服务"><span class="nav-number">6.</span> <span class="nav-text">启动服务</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -666,6 +706,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
