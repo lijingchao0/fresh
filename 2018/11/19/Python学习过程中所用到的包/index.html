@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本篇文章记录一下我在python学习的过程中所用到的内置包以及它的一些基本属性">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习过程中所用到的包">
+<meta property="og:url" content="http://yoursite.com/2018/11/19/Python学习过程中所用到的包/index.html">
+<meta property="og:site_name" content="李靖超的博客">
+<meta property="og:description" content="本篇文章记录一下我在python学习的过程中所用到的内置包以及它的一些基本属性">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-19T12:50:52.078Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python学习过程中所用到的包">
+<meta name="twitter:description" content="本篇文章记录一下我在python学习的过程中所用到的内置包以及它的一些基本属性">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/19/Python学习过程中所用到的包/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Python学习过程中所用到的包 | 李靖超的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">李靖超的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">吾生也有涯，而知也无涯</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/19/Python学习过程中所用到的包/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李靖超">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李靖超的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python学习过程中所用到的包
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-19 10:04:11 / 修改时间：20:50:52" itemprop="dateCreated datePublished" datetime="2018-11-19T10:04:11+08:00">2018-11-19</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本篇文章记录一下我在python学习的过程中所用到的内置包以及它的一些基本属性<br><a id="more"></a></p>
+<h2 id="python内置包"><a href="#python内置包" class="headerlink" title="python内置包"></a>python内置包</h2><ul>
+<li><p>python里有些内置函数，不需要导入模块，就可以直接使用，例如abs()</p>
+</li>
+<li><p>导入模块与包都是通过import来导入的，即import 模块名或者包名</p>
+</li>
+<li><p>有些包里有内置函数，导入包名之后，可以直接通过包名.函数名来调用函数</p>
+</li>
+<li><p>在模块名或者包名过长时，为了后面的程序编写，可以给其取别名，即 import 模块名/包名  as 别名</p>
+</li>
+<li><p>我们知道包是模块的合集，如果使用到了包里的某些模块，一般情况下需要通过包名.模块名.函数名 来调用相应的函数，为了方便编写程序，可以通过 from  包名   import  模块名 直接导入模块，这样就不需要再写包名了</p>
+</li>
+<li><p>如果包里还有子包的话，可以通过 from  包名.子包名   import  模块名，导入模块，同样为了方便程序编写</p>
+</li>
+</ul>
+<p>总的来说如何使用一个包，与其自身的结构有很大的关系，具体使用还是需要参考具体的包结构。</p>
+<h3 id="import-os"><a href="#import-os" class="headerlink" title="import os"></a>import os</h3><p>os可以获取本机的基本信息以及可以对文件及文件夹进行相关操作<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># os operation system 操作系统</span></span><br><span class="line"><span class="comment"># os可以获取本机的基本信息以及可以对文件及文件夹进行相关操作</span></span><br><span class="line"></span><br><span class="line">print(os.name)</span><br><span class="line"><span class="comment"># nt 代表windows操作系统</span></span><br><span class="line"><span class="comment"># posix代表linux操作系统</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#获取电脑cpu数量</span></span><br><span class="line">os.cpu_count()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果不写路径地址 直接写文件名字</span></span><br><span class="line"><span class="comment"># 那么默认使用相对路径</span></span><br><span class="line">os.path.exists(<span class="string">'C:/Users/Administrator/Desktop/os测试/python.txt'</span>)</span><br><span class="line">os.path.exists(<span class="string">'python.txt'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取当前路径</span></span><br><span class="line">os.getcwd()</span><br><span class="line">os.path.abspath(<span class="string">'.'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取当前路径的父级路径</span></span><br><span class="line">os.path.abspath(<span class="string">'..'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取整个地址当中的最后一部分</span></span><br><span class="line">os.path.basename(<span class="string">'http://www.baidu.com'</span>)</span><br><span class="line">os.path.basename(<span class="string">'C:/Users/Administrator/Desktop/os测试/python.txt'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 地址路径会被斜杠分割成几部分</span></span><br><span class="line">os.path.commonpath([<span class="string">'http://www.jd.com'</span>,<span class="string">'http://www.taobao.com'</span>,<span class="string">'http://www.baidu.com'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回文件所在文件夹</span></span><br><span class="line"><span class="comment"># 返回一个文件夹的共有路径</span></span><br><span class="line">os.path.dirname(<span class="string">'C:/Users/Administrator/Desktop/os测试/python.txt'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取文件夹的创建日期</span></span><br><span class="line">result = os.path.getctime(<span class="string">'C:/Users/Administrator/Desktop/os测试/python.txt'</span>)</span><br><span class="line">print(time.localtime(result))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问时间</span></span><br><span class="line">result = os.path.getatime(<span class="string">'C:/Users/Administrator/Desktop/os测试/python.txt'</span>)</span><br><span class="line">print(time.localtime(result))</span><br><span class="line"><span class="comment"># modify 修改</span></span><br><span class="line">result = os.path.getmtime(<span class="string">'C:/Users/Administrator/Desktop/os测试/python.txt'</span>)</span><br><span class="line">print(time.localtime(result))</span><br><span class="line"><span class="comment"># 获取文件大小</span></span><br><span class="line">os.path.getsize(<span class="string">'C:/Users/Administrator/Desktop/os测试/python.txt'</span>)</span><br><span class="line"></span><br><span class="line">os.path.isfile(<span class="string">'C:/Users/Administrator/Desktop/os测试/python.txt'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回一个元组 由路径和文件名字两部分组成</span></span><br><span class="line">os.path.split(<span class="string">'C:/Users/Administrator/Desktop/os测试/python.txt'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回一个元组 由全部路径和最后的文件后缀两部分组成</span></span><br><span class="line">os.path.splitext(<span class="string">'C:/Users/Administrator/Desktop/os测试/python.txt'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建文件</span></span><br><span class="line">os.mkdir(<span class="string">'text.txt'</span>)</span><br><span class="line"><span class="comment">#重命名</span></span><br><span class="line">os.rename(<span class="string">'python'</span>,<span class="string">'naem'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="import-sys"><a href="#import-sys" class="headerlink" title="import sys"></a>import sys</h3><p>sys模块常见的函数列表</p>
+<ul>
+<li><p>sys.argv: 实现从程序外部向程序传递参数。</p>
+</li>
+<li><p>sys.exit([arg]): 程序中间的退出，arg=0为正常退出。</p>
+</li>
+<li><p>sys.getdefaultencoding(): 获取系统当前编码，一般默认为ascii。</p>
+</li>
+<li><p>sys.setdefaultencoding(): 设置系统默认编码，执行dir（sys）时不会看到这个方法，在解释器中执行不通过，可以先执行reload(sys)，在执行 setdefaultencoding(‘utf8’)，此时将系统默认编码设置为utf8。（见设置系统默认编码 ）</p>
+</li>
+<li><p>sys.getfilesystemencoding(): 获取文件系统使用编码方式，Windows下返回’mbcs’，mac下返回’utf-8’.</p>
+</li>
+<li><p>sys.path: 获取指定模块搜索路径的字符串集合，可以将写好的模块放在得到的某个路径下，就可以在程序中import时正确找到。</p>
+</li>
+<li><p>sys.platform: 获取当前系统平台。</p>
+</li>
+<li><p>sys.stdin,sys.stdout,sys.stderr: stdin , stdout , 以及stderr 变量包含与标准I/O 流对应的流对象. 如果需要更好地控制输出,而print 不能满足你的要求, 它们就是你所需要的. 你也可以替换它们, 这时候你就可以重定向输出和输入到其它设备( device ), 或者以非标准的方式处理它们</p>
+</li>
+</ul>
+<h3 id="import-shutil"><a href="#import-shutil" class="headerlink" title="import shutil"></a>import shutil</h3><p>文件处理的高级模块，功能比os更加强大<br>有关shutil的具体操作，我了解的不是太多，这里引用一篇别人写的博客</p>
+<blockquote>
+<p><a href="https://www.cnblogs.com/caibao666/p/6433864.html" target="_blank" rel="noopener">shutil</a></p>
+</blockquote>
+<h3 id="import-csv"><a href="#import-csv" class="headerlink" title="import csv"></a>import csv</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="comment"># comma sepreated value 逗号分隔值</span></span><br><span class="line"></span><br><span class="line">rows = [[<span class="string">'张三'</span>,<span class="number">14</span>],[<span class="string">'李四'</span>,<span class="number">24</span>],[<span class="string">'王五'</span>,<span class="number">34</span>]]</span><br><span class="line"><span class="comment"># with open('')</span></span><br><span class="line"><span class="comment"># csv 在写入的时候 默认每次写入会有一个空行作为分割</span></span><br><span class="line"><span class="comment"># 使用 newline='' 可以将空行去掉</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'test1.csv'</span>,<span class="string">'w'</span>,newline=<span class="string">''</span>) <span class="keyword">as</span> csv_file:</span><br><span class="line">    <span class="comment"># 获取一个csv对象进行写入</span></span><br><span class="line">    writer = csv.writer(csv_file)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> rows:</span><br><span class="line">        <span class="comment"># writerow 写入一行数据</span></span><br><span class="line">        writer.writerow(row)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'test1.csv'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> read_file:</span><br><span class="line">    <span class="comment"># 获取一个csv对象进行读取</span></span><br><span class="line">    reader = csv.reader(read_file)</span><br><span class="line">    print([row <span class="keyword">for</span> row <span class="keyword">in</span> reader])</span><br></pre></td></tr></table></figure>
+<h3 id="import-time"><a href="#import-time" class="headerlink" title="import time"></a>import time</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">time1 = time.localtime()</span><br><span class="line">print(time)</span><br><span class="line"><span class="comment"># 从1970年到现在的秒数</span></span><br><span class="line">time2 = time.time()</span><br><span class="line">print(time2)</span><br><span class="line"><span class="comment"># 从1970年开始往后指定的秒数</span></span><br><span class="line">time3 = time.localtime(<span class="number">1531274000</span>)</span><br><span class="line">print(time3)</span><br><span class="line"></span><br><span class="line">result = time.strftime(<span class="string">'%y %m %d %H %M %S'</span>,time.localtime())</span><br><span class="line">print(result)</span><br><span class="line"><span class="comment"># 线程休眠</span></span><br><span class="line"><span class="comment"># 爬虫：获取对方数据太快，有可能被认为是爬虫程序，所以在爬虫中有时候需要减缓速度</span></span><br><span class="line"><span class="comment"># 线程：a代码块的执行受b代码影响，必须确保b代码先执行并返回数据，这时候就可以先让a代码休眠一段时间</span></span><br><span class="line"><span class="comment"># （注意：休眠不是必须的，也不是最好的）</span></span><br><span class="line"><span class="comment"># 定时任务：需要代码到指定时间 去执行某个任务，当时间还未到达，可以让程序先休眠</span></span><br><span class="line">time.sleep(<span class="number">5</span>)</span><br><span class="line"><span class="comment"># print('-----------------')</span></span><br><span class="line"><span class="comment"># 获取现在的日期和时间</span></span><br></pre></td></tr></table></figure>
+<h3 id="import-datetime"><a href="#import-datetime" class="headerlink" title="import datetime"></a>import datetime</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取现在的时间</span></span><br><span class="line">date1 = datetime.datetime.now()</span><br><span class="line">print(date1)</span><br><span class="line">date2 = date1.strftime(<span class="string">'%y-%m-%d %H:%M:%S'</span>)</span><br><span class="line">print(date2)</span><br><span class="line">date2 = date1.strftime(<span class="string">'%y year %m month %d day %H:%M:%S'</span>)</span><br><span class="line">print(date2)</span><br><span class="line"><span class="comment"># UnicodeEncodeError: 'locale' codec can't encode character '\u5e74' in position 2: Illegal byte sequence</span></span><br><span class="line"><span class="comment"># 编码错误：本地文件不能对指定位置的字符进行编码</span></span><br><span class="line"><span class="comment"># date2 = date1.strftime('%y年%m月%d日%H:%M:%S')</span></span><br><span class="line">date2 = date1.strftime(<span class="string">'%yyear%mmonth%dday %H:%M:%S'</span>)</span><br><span class="line">date2 = date2.replace(<span class="string">'year'</span>,<span class="string">'年'</span>).replace(<span class="string">'month'</span>,<span class="string">'月'</span>).replace(<span class="string">'day'</span>,<span class="string">'日'</span>)</span><br><span class="line">print(date2)</span><br><span class="line"><span class="comment"># 怎么获取今天往后推一天的时间</span></span><br><span class="line"><span class="comment"># 可以用来计算过期时间</span></span><br><span class="line">date3 = datetime.timedelta(days = <span class="number">1</span>)</span><br><span class="line">date4 = datetime.datetime.now()+ date3</span><br><span class="line">print(date4)</span><br><span class="line"><span class="comment"># TypeError: Required argument 'year' (pos 1) not found</span></span><br><span class="line"><span class="comment"># 获取年月日</span></span><br><span class="line">date5 = date1.date()</span><br><span class="line">print(date5)</span><br><span class="line">print(date5.year)</span><br><span class="line"><span class="comment"># 获取时间</span></span><br><span class="line">date6 = date1.time()</span><br><span class="line">print(date6)</span><br><span class="line">date7 = datetime.datetime.now()</span><br><span class="line"><span class="comment"># timestamp() 时间戳  从1970年到现在的秒数</span></span><br><span class="line">print(date7.timestamp())</span><br></pre></td></tr></table></figure>
+<ul>
+<li>import random<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#生成指定范围内的随机整数</span></span><br><span class="line">result = random.randint(<span class="number">1</span>,<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#从列表中随机选择一个元素</span></span><br><span class="line">list = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">print(random.choice(list))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="import-sqlite3"><a href="#import-sqlite3" class="headerlink" title="import sqlite3"></a>import sqlite3</h3><p>引入sqlite3数据库<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 连接数据库，如果数据库不存在，会自动在当前目录创建</span></span><br><span class="line">conn = sqlite3.connect(<span class="string">'数据库名称'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="import-json"><a href="#import-json" class="headerlink" title="import json"></a>import json</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">json.dumps <span class="comment"># 用于将 Python 对象编码成 JSON 字符串。</span></span><br><span class="line">json.loads <span class="comment"># 用于解码 JSON 数据。该函数返回 Python 字段的数据类型。</span></span><br></pre></td></tr></table></figure>
+<h3 id="import-string"><a href="#import-string" class="headerlink" title="import string"></a>import string</h3><ul>
+<li>string的一些常用属性<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">print(string.ascii_letters)     <span class="comment"># 生成所有字母 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'</span></span><br><span class="line">print(string.ascii_lowercase)   <span class="comment"># 生成小写字母 'abcdefghijklmnopqrstuvwxyz'</span></span><br><span class="line">print(string.ascii_uppercase)   <span class="comment"># 生成大写字母 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'</span></span><br><span class="line">print(string.digits)            <span class="comment"># 生成数字组成的字符串 '0123456789'</span></span><br><span class="line">print(string.hexdigits)         <span class="comment"># 输出所有16进制数字字符串 '0123456789abcdefABCDEF'</span></span><br><span class="line">print(string.octdigits)         <span class="comment"># 输出所有8进制数字字符串 '01234567'</span></span><br><span class="line">print(string.printable)         <span class="comment"># 输出所有可打印字符的字符串 '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTU...</span></span><br><span class="line">print(string.punctuation)       <span class="comment"># 输出所有标点符号的字符串 '!"#$%&amp;\'()*+,-./:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~'</span></span><br><span class="line">print(string.whitespace)        <span class="comment"># 输出所有空白符号的字符串 ' \t\n\r\x0b\x0c'</span></span><br><span class="line">---------------------</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="import-requests-数据请求包"><a href="#import-requests-数据请求包" class="headerlink" title="import requests     # 数据请求包"></a>import requests     # 数据请求包</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># params 请求网址要传递的参数</span></span><br><span class="line">response = requests.get(url,params=&#123;<span class="string">'key'</span>:<span class="string">'value'</span>&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="import-re"><a href="#import-re" class="headerlink" title="import re"></a>import re</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pattern = re.compile(<span class="string">'(\d+)(\w+)'</span>)</span><br><span class="line">content = <span class="string">'123helloworld'</span></span><br><span class="line">result = re.match(pattern,content)	<span class="comment"># match 匹配的是内容的开始部分</span></span><br><span class="line">result = re.search(pattern,content)	<span class="comment">#search 找到字符串当中第一个符合正则的内容</span></span><br><span class="line">result =re.findall(pattern,content)	<span class="comment">#findall 找到所有匹配的内容</span></span><br><span class="line"></span><br><span class="line">content = <span class="string">'杨过对战金轮法王,郭靖观战'</span></span><br><span class="line">pattern = re.compile(<span class="string">r'杨\s*过'</span>)</span><br><span class="line">result = pattern.sub(<span class="string">'吕布'</span>,content)	<span class="comment"># sub 替换</span></span><br></pre></td></tr></table></figure>
+<h3 id="import-xlwt"><a href="#import-xlwt" class="headerlink" title="import xlwt"></a>import xlwt</h3><p>处理Excel文件必须的模块<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 创建工作表对象 并设置编码格式为utf-8</span></span><br><span class="line">   workBook = xlwt.Workbook(encoding=<span class="string">'utf-8'</span>)</span><br><span class="line">   sheet = workBook.add_sheet(<span class="string">'python职位表'</span>)</span><br><span class="line">   <span class="comment"># 值1：行 索引从0开始</span></span><br><span class="line">   <span class="comment"># 值2：列 索引从0开始</span></span><br><span class="line">   <span class="comment"># 值3：写入的内容</span></span><br><span class="line">   sheet.write(<span class="number">0</span>,<span class="number">0</span>,<span class="string">'职位名称'</span>)</span><br><span class="line">   sheet.write(<span class="number">0</span>,<span class="number">1</span>,<span class="string">'公司名称'</span>)</span><br><span class="line">   sheet.write(<span class="number">0</span>,<span class="number">2</span>,<span class="string">'薪资水平'</span>)</span><br><span class="line">   sheet.write(<span class="number">0</span>,<span class="number">3</span>,<span class="string">'工作地点'</span>)</span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">   sheet.write(<span class="number">1</span>,<span class="number">0</span>,<span class="string">'job'</span>)</span><br><span class="line">   sheet.write(<span class="number">1</span>,<span class="number">1</span>,<span class="string">'company'</span>)</span><br><span class="line">   sheet.write(<span class="number">1</span>,<span class="number">2</span>,<span class="string">'salary'</span>)</span><br><span class="line">   sheet.write(<span class="number">1</span>,<span class="number">3</span>,<span class="string">'location'</span>)</span><br><span class="line"></span><br><span class="line">   workBook.save(<span class="string">'Python职位介绍表.xls'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="import-math"><a href="#import-math" class="headerlink" title="import math"></a>import math</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ceil(x) <span class="comment"># 取顶</span></span><br><span class="line">floor(x) <span class="comment"># 取底</span></span><br><span class="line">fabs(x) <span class="comment"># 取绝对值</span></span><br><span class="line">factorial(x) <span class="comment"># 阶乘</span></span><br><span class="line">hypot(x,y)  <span class="comment"># qrt(x*x+y*y)</span></span><br><span class="line">pow(x,y) <span class="comment"># x的y次方</span></span><br><span class="line">sqrt(x) <span class="comment"># 开平方</span></span><br><span class="line">log(x)</span><br><span class="line">log10(x)</span><br><span class="line">trunc(x)  <span class="comment"># 截断取整数部分</span></span><br><span class="line">isnan (x)  <span class="comment"># 判断是否NaN(not a number)</span></span><br><span class="line">degree (x) <span class="comment"># 弧度转角度</span></span><br><span class="line">radians(x) <span class="comment"># 角度转弧度</span></span><br></pre></td></tr></table></figure>
+<p>以上就是我在学习python的过程中遇到的一些内置包，后续遇到的内置包会陆续的添加到本篇博客当中</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/17/Centos7下部署Django-uWSGI-Nginx/" rel="next" title="Centos7下部署Django+uWSGI+Nginx">
+                <i class="fa fa-chevron-left"></i> Centos7下部署Django+uWSGI+Nginx
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">李靖超</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/lijingchao0" title="GitHub &rarr; https://github.com/lijingchao0" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python内置包"><span class="nav-number">1.</span> <span class="nav-text">python内置包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#import-os"><span class="nav-number">1.1.</span> <span class="nav-text">import os</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-sys"><span class="nav-number">1.2.</span> <span class="nav-text">import sys</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-shutil"><span class="nav-number">1.3.</span> <span class="nav-text">import shutil</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-csv"><span class="nav-number">1.4.</span> <span class="nav-text">import csv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-time"><span class="nav-number">1.5.</span> <span class="nav-text">import time</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-datetime"><span class="nav-number">1.6.</span> <span class="nav-text">import datetime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-sqlite3"><span class="nav-number">1.7.</span> <span class="nav-text">import sqlite3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-json"><span class="nav-number">1.8.</span> <span class="nav-text">import json</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-string"><span class="nav-number">1.9.</span> <span class="nav-text">import string</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-requests-数据请求包"><span class="nav-number">1.10.</span> <span class="nav-text">import requests     # 数据请求包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-re"><span class="nav-number">1.11.</span> <span class="nav-text">import re</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-xlwt"><span class="nav-number">1.12.</span> <span class="nav-text">import xlwt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-math"><span class="nav-number">1.13.</span> <span class="nav-text">import math</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李靖超</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
