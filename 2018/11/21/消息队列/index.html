@@ -108,20 +108,36 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="李靖超的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="什么叫消息队列消息（Message）是指在应用间传送的数据。消息可以非常简单，比如只包含文本字符串，也可以更复杂，可能包含嵌入对象。 消息队列（Message Queue）是一种应用间的通信方式，消息发送后可以立即返回，由消息系统来确保消息的可靠传递。消息发布者只管把消息发布到 MQ 中而不用管谁来取，消息使用者只管从 MQ 中取消息而不管是谁发布的。这样发布者和使用者都不用知道对方的存在。  为">
+<meta name="keywords" content="消息队列,rabbitmq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="消息队列">
+<meta property="og:url" content="http://yoursite.com/2018/11/21/消息队列/index.html">
 <meta property="og:site_name" content="李靖超的博客">
+<meta property="og:description" content="什么叫消息队列消息（Message）是指在应用间传送的数据。消息可以非常简单，比如只包含文本字符串，也可以更复杂，可能包含嵌入对象。 消息队列（Message Queue）是一种应用间的通信方式，消息发送后可以立即返回，由消息系统来确保消息的可靠传递。消息发布者只管把消息发布到 MQ 中而不用管谁来取，消息使用者只管从 MQ 中取消息而不管是谁发布的。这样发布者和使用者都不用知道对方的存在。  为">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://box.kancloud.cn/3a49491bb1571769cc0b4d5449e7910d_519x132.png">
+<meta property="og:image" content="https://box.kancloud.cn/8366037f115f2f17360f8a94b3328cbf_399x212.png">
+<meta property="og:image" content="https://box.kancloud.cn/efe34e74aae73816c2fe94e6e9440dc3_570x189.png">
+<meta property="og:image" content="https://box.kancloud.cn/ba5a83ba2b72c629e320b414e22f81e5_286x109.png">
+<meta property="og:image" content="https://box.kancloud.cn/003b2621878bc4babd6f5cd55dc43d0d_346x179.png">
+<meta property="og:image" content="https://box.kancloud.cn/4c7f82196a001a02833cb4df2b9ab025_436x113.png">
+<meta property="og:image" content="https://box.kancloud.cn/43f5aeabd244b440ddff85e9d7fa5fa0_456x109.png">
+<meta property="og:image" content="https://box.kancloud.cn/97b527ab408f4a8e0e35470f6bad1309_1105x429.png">
+<meta property="og:image" content="https://box.kancloud.cn/ab5ef328182c12f69a770e0f79edc4d2_406x109.png">
+<meta property="og:image" content="https://box.kancloud.cn/d6f0d3912fe986b27091e12fe0db82bc_406x117.png">
+<meta property="og:updated_time" content="2018-11-21T01:48:26.365Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="李靖超的博客">
+<meta name="twitter:title" content="消息队列">
+<meta name="twitter:description" content="什么叫消息队列消息（Message）是指在应用间传送的数据。消息可以非常简单，比如只包含文本字符串，也可以更复杂，可能包含嵌入对象。 消息队列（Message Queue）是一种应用间的通信方式，消息发送后可以立即返回，由消息系统来确保消息的可靠传递。消息发布者只管把消息发布到 MQ 中而不用管谁来取，消息使用者只管从 MQ 中取消息而不管是谁发布的。这样发布者和使用者都不用知道对方的存在。  为">
+<meta name="twitter:image" content="https://box.kancloud.cn/3a49491bb1571769cc0b4d5449e7910d_519x132.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/21/消息队列/">
 
 
 
@@ -131,7 +147,7 @@
   };
 </script>
 
-  <title>李靖超的博客</title>
+  <title>消息队列 | 李靖超的博客</title>
   
 
 
@@ -180,8 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -222,7 +237,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -301,9 +316,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -335,10 +350,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/11/21/消息队列/" class="post-title-link" itemprop="http://yoursite.com/index.html">消息队列</a>
+          <h1 class="post-title" itemprop="name headline">消息队列
               
             
           </h1>
@@ -401,9 +413,7 @@
       
 
       
-        
-          
-            <h1 id="什么叫消息队列"><a href="#什么叫消息队列" class="headerlink" title="什么叫消息队列"></a>什么叫消息队列</h1><p><strong>消息</strong>（Message）是指在应用间传送的<strong>数据</strong>。消息可以非常简单，比如只包含文本字符串，也可以更复杂，可能包含嵌入对象。</p>
+        <h1 id="什么叫消息队列"><a href="#什么叫消息队列" class="headerlink" title="什么叫消息队列"></a>什么叫消息队列</h1><p><strong>消息</strong>（Message）是指在应用间传送的<strong>数据</strong>。消息可以非常简单，比如只包含文本字符串，也可以更复杂，可能包含嵌入对象。</p>
 <p><strong>消息队列</strong>（Message Queue）是一种应用间的<strong>通信方式</strong>，消息发送后可以立即返回，由消息系统来确保消息的可靠传递。消息发布者只管把消息发布到 MQ 中而不用管谁来取，消息使用者只管从 MQ 中取消息而不管是谁发布的。这样发布者和使用者都不用知道对方的存在。</p>
 <hr>
 <h1 id="为何用消息队列"><a href="#为何用消息队列" class="headerlink" title="为何用消息队列"></a>为何用消息队列</h1><p>从上面的描述中可以看出消息队列是一种应用间的异步协作机制，那什么时候需要使用 MQ 呢？</p>
@@ -452,8 +462,6 @@
 <p>客户端A，客户端B，客户端N订阅同一主题，进行消息发布和接收。实现类似聊天室效果。</p>
 <p>以上实际是消息队列的两种消息模式，点对点或发布订阅模式。</p>
 
-          
-        
       
     </div>
 
@@ -474,310 +482,38 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/19/Python学习过程中所用到的包/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="李靖超">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="李靖超的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/11/19/Python学习过程中所用到的包/" class="post-title-link" itemprop="http://yoursite.com/index.html">Python学习过程中所用到的包</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-19 10:04:11 / 修改时间：20:50:52" itemprop="dateCreated datePublished" datetime="2018-11-19T10:04:11+08:00">2018-11-19</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/消息队列/" rel="tag"># 消息队列</a>
           
-            
+            <a href="/tags/rabbitmq/" rel="tag"># rabbitmq</a>
           
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <p>本篇文章记录一下我在python学习的过程中所用到的内置包以及它的一些基本属性<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/11/19/Python学习过程中所用到的包/#more" rel="contents">
-                阅读全文 &raquo;
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/19/Python学习过程中所用到的包/" rel="next" title="Python学习过程中所用到的包">
+                <i class="fa fa-chevron-left"></i> Python学习过程中所用到的包
               </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/17/Centos7下部署Django-uWSGI-Nginx/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="李靖超">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="李靖超的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/11/17/Centos7下部署Django-uWSGI-Nginx/" class="post-title-link" itemprop="http://yoursite.com/index.html">Centos7下部署Django+uWSGI+Nginx</a>
-              
             
-          </h1>
-        
+          </div>
 
-        <div class="post-meta">
-          <span class="post-time">
+          <span class="post-nav-divider"></span>
 
+          <div class="post-nav-prev post-nav-item">
             
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-17 17:49:22 / 修改时间：21:13:11" itemprop="dateCreated datePublished" datetime="2018-11-17T17:49:22+08:00">2018-11-17</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>本篇博客讲述如何在linux服务器上部署django项目<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/11/17/Centos7下部署Django-uWSGI-Nginx/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -787,14 +523,15 @@
   </article>
 
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -815,8 +552,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -896,6 +642,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么叫消息队列"><span class="nav-number">1.</span> <span class="nav-text">什么叫消息队列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为何用消息队列"><span class="nav-number">2.</span> <span class="nav-text">为何用消息队列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#消息队列使用的四种场景介绍"><span class="nav-number">3.</span> <span class="nav-text">消息队列使用的四种场景介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异步处理"><span class="nav-number">3.1.</span> <span class="nav-text">异步处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用解耦"><span class="nav-number">3.2.</span> <span class="nav-text">应用解耦</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流量削锋"><span class="nav-number">3.3.</span> <span class="nav-text">流量削锋</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志处理"><span class="nav-number">3.4.</span> <span class="nav-text">日志处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息通讯"><span class="nav-number">3.5.</span> <span class="nav-text">消息通讯</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1031,6 +793,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
 
   
 
