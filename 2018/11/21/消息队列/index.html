@@ -108,13 +108,13 @@
 
 
 
-  <meta name="description" content="什么叫消息队列消息（Message）是指在应用间传送的数据。消息可以非常简单，比如只包含文本字符串，也可以更复杂，可能包含嵌入对象。 消息队列（Message Queue）是一种应用间的通信方式，消息发送后可以立即返回，由消息系统来确保消息的可靠传递。消息发布者只管把消息发布到 MQ 中而不用管谁来取，消息使用者只管从 MQ 中取消息而不管是谁发布的。这样发布者和使用者都不用知道对方的存在。  为">
+  <meta name="description" content="本篇博客主要介绍一下消息对列">
 <meta name="keywords" content="消息队列,rabbitmq">
 <meta property="og:type" content="article">
 <meta property="og:title" content="消息队列">
 <meta property="og:url" content="http://yoursite.com/2018/11/21/消息队列/index.html">
 <meta property="og:site_name" content="李靖超的博客">
-<meta property="og:description" content="什么叫消息队列消息（Message）是指在应用间传送的数据。消息可以非常简单，比如只包含文本字符串，也可以更复杂，可能包含嵌入对象。 消息队列（Message Queue）是一种应用间的通信方式，消息发送后可以立即返回，由消息系统来确保消息的可靠传递。消息发布者只管把消息发布到 MQ 中而不用管谁来取，消息使用者只管从 MQ 中取消息而不管是谁发布的。这样发布者和使用者都不用知道对方的存在。  为">
+<meta property="og:description" content="本篇博客主要介绍一下消息对列">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://box.kancloud.cn/3a49491bb1571769cc0b4d5449e7910d_519x132.png">
 <meta property="og:image" content="https://box.kancloud.cn/8366037f115f2f17360f8a94b3328cbf_399x212.png">
@@ -126,10 +126,10 @@
 <meta property="og:image" content="https://box.kancloud.cn/97b527ab408f4a8e0e35470f6bad1309_1105x429.png">
 <meta property="og:image" content="https://box.kancloud.cn/ab5ef328182c12f69a770e0f79edc4d2_406x109.png">
 <meta property="og:image" content="https://box.kancloud.cn/d6f0d3912fe986b27091e12fe0db82bc_406x117.png">
-<meta property="og:updated_time" content="2018-11-21T01:48:26.365Z">
+<meta property="og:updated_time" content="2018-11-21T01:59:49.306Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="消息队列">
-<meta name="twitter:description" content="什么叫消息队列消息（Message）是指在应用间传送的数据。消息可以非常简单，比如只包含文本字符串，也可以更复杂，可能包含嵌入对象。 消息队列（Message Queue）是一种应用间的通信方式，消息发送后可以立即返回，由消息系统来确保消息的可靠传递。消息发布者只管把消息发布到 MQ 中而不用管谁来取，消息使用者只管从 MQ 中取消息而不管是谁发布的。这样发布者和使用者都不用知道对方的存在。  为">
+<meta name="twitter:description" content="本篇博客主要介绍一下消息对列">
 <meta name="twitter:image" content="https://box.kancloud.cn/3a49491bb1571769cc0b4d5449e7910d_519x132.png">
 
 
@@ -375,7 +375,7 @@
                 
               
 
-              <time title="创建时间：2018-11-21 09:15:55 / 修改时间：09:48:26" itemprop="dateCreated datePublished" datetime="2018-11-21T09:15:55+08:00">2018-11-21</time>
+              <time title="创建时间：2018-11-21 09:15:55 / 修改时间：09:59:49" itemprop="dateCreated datePublished" datetime="2018-11-21T09:15:55+08:00">2018-11-21</time>
             
 
             
@@ -413,7 +413,8 @@
       
 
       
-        <h1 id="什么叫消息队列"><a href="#什么叫消息队列" class="headerlink" title="什么叫消息队列"></a>什么叫消息队列</h1><p><strong>消息</strong>（Message）是指在应用间传送的<strong>数据</strong>。消息可以非常简单，比如只包含文本字符串，也可以更复杂，可能包含嵌入对象。</p>
+        <p>本篇博客主要介绍一下消息对列<br><a id="more"></a></p>
+<h1 id="什么叫消息队列"><a href="#什么叫消息队列" class="headerlink" title="什么叫消息队列"></a>什么叫消息队列</h1><p><strong>消息</strong>（Message）是指在应用间传送的<strong>数据</strong>。消息可以非常简单，比如只包含文本字符串，也可以更复杂，可能包含嵌入对象。</p>
 <p><strong>消息队列</strong>（Message Queue）是一种应用间的<strong>通信方式</strong>，消息发送后可以立即返回，由消息系统来确保消息的可靠传递。消息发布者只管把消息发布到 MQ 中而不用管谁来取，消息使用者只管从 MQ 中取消息而不管是谁发布的。这样发布者和使用者都不用知道对方的存在。</p>
 <hr>
 <h1 id="为何用消息队列"><a href="#为何用消息队列" class="headerlink" title="为何用消息队列"></a>为何用消息队列</h1><p>从上面的描述中可以看出消息队列是一种应用间的异步协作机制，那什么时候需要使用 MQ 呢？</p>
