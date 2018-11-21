@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本篇博客主要介绍一下rabbitmq以及安装与使用">
+<meta name="keywords" content="rabbitmq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RabbitMQ">
+<meta property="og:url" content="http://yoursite.com/2018/11/21/RabbitMQ/index.html">
+<meta property="og:site_name" content="李靖超的博客">
+<meta property="og:description" content="本篇博客主要介绍一下rabbitmq以及安装与使用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://box.kancloud.cn/a02211c868ca3192b4f7f8d9af4bbd7c_536x86.png">
+<meta property="og:image" content="https://box.kancloud.cn/5534033654975dec4f1aa1f746452ee6_869x420.png">
+<meta property="og:image" content="https://box.kancloud.cn/a642a8065db7f6b250bbd8ba04073ab0_680x344.jpg">
+<meta property="og:image" content="https://box.kancloud.cn/0df7fc413ae1f796d04d0f6f052c3a11_1024x683.jpg">
+<meta property="og:image" content="https://box.kancloud.cn/d55ac336d3c298d60fcf5e26e6c6fdf1_600x450.png">
+<meta property="og:image" content="https://box.kancloud.cn/4cfe6f43c82a483a889652f5a4e9f1c1_720x438.png">
+<meta property="og:updated_time" content="2018-11-21T03:39:08.710Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RabbitMQ">
+<meta name="twitter:description" content="本篇博客主要介绍一下rabbitmq以及安装与使用">
+<meta name="twitter:image" content="https://box.kancloud.cn/a02211c868ca3192b4f7f8d9af4bbd7c_536x86.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/21/RabbitMQ/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>RabbitMQ | 李靖超的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">李靖超的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">吾生也有涯，而知也无涯</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/21/RabbitMQ/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李靖超">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李靖超的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RabbitMQ
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-21 10:11:03 / 修改时间：11:39:08" itemprop="dateCreated datePublished" datetime="2018-11-21T10:11:03+08:00">2018-11-21</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本篇博客主要介绍一下rabbitmq以及安装与使用</p>
+<a id="more"></a>
+<h1 id="RabbitMQ概述和运行机制"><a href="#RabbitMQ概述和运行机制" class="headerlink" title="RabbitMQ概述和运行机制"></a>RabbitMQ概述和运行机制</h1><h1 id="RabbitMQ概述"><a href="#RabbitMQ概述" class="headerlink" title="RabbitMQ概述"></a>RabbitMQ概述</h1><p><strong>RabbitMQ概述</strong>：RabbitMQ是使用最广泛的开源消息代理。RabbitMQ轻量级，易于在集群内部和云平台中部署。它支持多种消息传递协议。 它可以满足企业高规模，高可用性的要求。RabbitMQ使用Erlang语言开发的。<br><strong>MQ概述</strong>：全称为Message Queue, 消息队列（MQ）是一种应用程序对应用程序的通信方法。应用程序通过读写队列的消息（针对应用程序的数据）来通信，而无需专用连接来链接它们。<br><strong>MQ运行机制</strong>： P表示生产者，C表示消费者，红色部分为消息队列</p>
+<p><img src="https://box.kancloud.cn/a02211c868ca3192b4f7f8d9af4bbd7c_536x86.png" alt=""></p>
+<h2 id="MQ实战场景："><a href="#MQ实战场景：" class="headerlink" title="MQ实战场景："></a>MQ实战场景：</h2><p>1.我们在双11的时候，当我们凌晨大量的秒杀和抢购商品，然后去结算的时候，就会发现，界面会提醒我们，让我们稍等，以及一些友好的图片文字提醒。而不是像前几年的时代，动不动就页面卡死，报错等来呈现给用户。在这个业务场景中，我们就可以采用队列的机制来处理，因为同时结算就只能达到这么多。</p>
+<p><img src="https://box.kancloud.cn/5534033654975dec4f1aa1f746452ee6_869x420.png" alt=""></p>
+<p><img src="https://box.kancloud.cn/a642a8065db7f6b250bbd8ba04073ab0_680x344.jpg" alt=""></p>
+<p>2.在我们平时的超市中购物也是一样，当我们在结算的时候，并不会一窝蜂一样涌入收银台，而是排队结算。这也是队列机制。一个接着一个的处理，不能插队。</p>
+<p><img src="https://box.kancloud.cn/0df7fc413ae1f796d04d0f6f052c3a11_1024x683.jpg" alt=""></p>
+<hr>
+<p><strong>RabbitMQ 是一个由 Erlang 语言开发的 AMQP 的开源实现。</strong></p>
+<p>RabbitMQ是AMQP服务器的一种。<br><strong>AMQP简介</strong>：AMQP，即Advanced Message Queuing Protocol，<strong>高级消息队列协议</strong>，是应用层协议的一个开放标准，为面向消息的中间件设计。消息中间件主要用于组件之间的解耦，消息的发送者无需知道消息使用者的存在，反之亦然。 AMQP的主要特征是面向消息、队列、路由（包括点对点和发布/订阅）、可靠性、安全。<br>它是应用层协议的一个开放标准，为面向消息的中间件设计，基于此协议的客户端与消息中间件可传递消息，<strong>并不受产品、开发语言等条件的限制。</strong></p>
+<p>AMQP 里主要要说两个组件：Exchange 和 Queue （在 AMQP 1.0 里还会有变动），如下图所示，绿色的 X 就是 Exchange ，红色的是 Queue ，这两者都在 Server 端，又称作 Broker ，这部分是 RabbitMQ 实现的，而蓝色的则是客户端，通常有 Producer（生产者） 和 Consumer（消费者） 两种类型：<br><img src="https://box.kancloud.cn/d55ac336d3c298d60fcf5e26e6c6fdf1_600x450.png" alt=""><br>Publisher<br>消息的生产者，也是一个向交换器发布消息的客户端应用程序。<br>Exchange<br>交换器，用来接收生产者发送的消息并将这些消息路由给服务器中的队列。<br>Queue<br>消息队列，用来保存消息直到发送给消费者。它是消息的容器，也是消息的终点。一个消息可投入一个或多个队列。消息一直在队列里面，等待消费者连接到这个队列将其取走。<br>Consumer<br>消息的消费者，表示一个从消息队列中取得消息的客户端应用程序。<br>Broker<br>表示消息队列服务器实体。</p>
+<p>RabbitMQ 最初起源于金融系统，用于在分布式系统中存储转发消息，在易用性、扩展性、高可用性等方面表现不俗。具体特点包括：</p>
+<ul>
+<li><p>可靠性（Reliability）<br>RabbitMQ 使用一些机制来保证可靠性，如持久化、传输确认、发布确认。</p>
+</li>
+<li><p>灵活的路由（Flexible Routing）<br>在消息进入队列之前，通过 Exchange 来路由消息的。对于典型的路由功能，RabbitMQ 已经提供了一些内置的 Exchange 来实现。针对更复杂的路由功能，可以将多个 Exchange 绑定在一起，也通过插件机制实现自己的 Exchange 。</p>
+</li>
+<li><p>消息集群（Clustering）<br>多个 RabbitMQ 服务器可以组成一个集群，形成一个逻辑 Broker 。</p>
+</li>
+<li><p>高可用（Highly Available Queues）<br>队列可以在集群中的机器上进行镜像，使得在部分节点出问题的情况下队列仍然可用。</p>
+</li>
+<li><p>多种协议（Multi-protocol）<br>RabbitMQ 支持多种消息队列协议，比如 STOMP、MQTT 等等。</p>
+</li>
+<li><p>多语言客户端（Many Clients）<br>RabbitMQ 几乎支持所有常用语言，比如 Java、.NET、Ruby 等等。</p>
+</li>
+<li><p>管理界面（Management UI）<br>RabbitMQ 提供了一个易用的用户界面，使得用户可以监控和管理消息 Broker 的许多方面。</p>
+</li>
+<li><p>跟踪机制（Tracing）<br>如果消息异常，RabbitMQ 提供了消息跟踪机制，使用者可以找出发生了什么。</p>
+</li>
+<li><p>插件机制（Plugin System）<br>RabbitMQ 提供了许多插件，来从多方面进行扩展，也可以编写自己的插件。</p>
+</li>
+</ul>
+<h1 id="RabbitMQ-安装"><a href="#RabbitMQ-安装" class="headerlink" title="RabbitMQ 安装"></a>RabbitMQ 安装</h1><p>RabbitMQ是用erlang语言编写的，所以我们先安装erlang语言环境<br>配置erlang语言环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/yum.repos.d/rabbitmq-erlang.repo</span><br><span class="line"># 在rabbitmq-erlang.repo 文件中加入下面的代码</span><br><span class="line">[rabbitmq-erlang]</span><br><span class="line">name=rabbitmq-erlang</span><br><span class="line">baseurl=https://dl.bintray.com/rabbitmq/rpm/erlang/20/el/7</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc</span><br><span class="line">enabled=1</span><br><span class="line"># 执行导入key</span><br><span class="line">rpm --import  https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc</span><br><span class="line"># 安装erlang</span><br><span class="line">yum install erlang -y  #安装erlang</span><br></pre></td></tr></table></figure>
+<p><strong>安装rabbitmq服务</strong></p>
+<p>下载rabbitmq  地址：<a href="http://www.rabbitmq.com/download.html" target="_blank" rel="noopener">http://www.rabbitmq.com/download.html</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.7.8/rabbitmq-server-3.7.8-1.el7.noarch.rpm</span><br><span class="line"></span><br><span class="line">yum install  rabbitmq-server-3.7.8-1.el7.noarch.rpm</span><br></pre></td></tr></table></figure></p>
+<p>启用RabbitMQ的web插件 ，方便后期管理界面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-plugins enable rabbitmq_management</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">The following plugins have been configured:</span><br><span class="line">  rabbitmq_management</span><br><span class="line">  rabbitmq_management_agent</span><br><span class="line">  rabbitmq_web_dispatch</span><br><span class="line">Applying plugin configuration to rabbit@localhost...</span><br><span class="line">The following plugins have been enabled:</span><br><span class="line">  rabbitmq_management</span><br><span class="line">  rabbitmq_management_agent</span><br><span class="line">  rabbitmq_web_dispatch</span><br><span class="line"></span><br><span class="line">set 3 plugins.</span><br><span class="line">Offline change; changes will take effect at broker restart.</span><br></pre></td></tr></table></figure>
+<p>设置开机启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable rabbitmq-server.service</span><br></pre></td></tr></table></figure></p>
+<p>启动服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start rabbitmq-server</span><br></pre></td></tr></table></figure></p>
+<p>rabbitmq配置文件位置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /var/lib/rabbitmq/mnesia</span><br></pre></td></tr></table></figure></p>
+<p>访问控制台<br>默认用户名和密码： guest/guest 。guest用户仅允许从在服务器以localhost或127.0.0.1作为ip登录</p>
+<p>如果远程登录，如：<a href="http://192.168.1.63:15672/" target="_blank" rel="noopener">http://192.168.1.63:15672/</a>, 则会提示错误，登录不了。</p>
+<p>为RabbitMQ创建用户并赋权。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl add_user root 123456  #添加用户</span><br><span class="line">rabbitmqctl set_user_tags root administrator #设置用户权限为administrator</span><br></pre></td></tr></table></figure></p>
+<p>到此，已经搭建成功。</p>
+<h1 id="RabbitMQ使用方法"><a href="#RabbitMQ使用方法" class="headerlink" title="RabbitMQ使用方法"></a>RabbitMQ使用方法</h1><p><strong>RabbitMQ查看相关的命令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> rabbitmqctl list_connections   #用于查看当前的连接</span><br><span class="line">rabbitmqctl list_queues   #会列出所有队列名称，后边可能还会带着这个队列当前消息数</span><br><span class="line"> rabbitmqctl status        #查看当前队列信息</span><br></pre></td></tr></table></figure>
+<h2 id="RabbitMQ的vhost管理"><a href="#RabbitMQ的vhost管理" class="headerlink" title="RabbitMQ的vhost管理"></a>RabbitMQ的vhost管理</h2><p>当我们在创建用户时，会指定用户能访问一个虚拟机，并且该用户只能访问该虚拟机下的队列和交换机，如果没有指定，默认的是”/”;一个rabbitmq服务器上可以运行多个vhost，以便于适用不同的业务需要，这样做既可以满足权限配置的要求，也可以避免不同业务之间队列、交换机的命名冲突问题，因为不同vhost之间是隔离的。</p>
+<p>添加yang-web和yang-bbs两个虚拟机来管理网站和论坛的队列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl add_vhost yang-web</span><br><span class="line">rabbitmqctl add_vhost yang-bbs</span><br></pre></td></tr></table></figure></p>
+<p>查看创建的虚拟主机 网页查看</p>
+<p>删除bbs虚拟机<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">rabbitmqctl delete_vhost yang-bbs</span><br></pre></td></tr></table></figure></p>
+<p>查看虚拟机列表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl list_vhosts</span><br></pre></td></tr></table></figure></p>
+<p><strong>“/”是rabbitmq默认的虚拟机，之前默认连接的都是它</strong></p>
+<h1 id="RabbitMQ管理用户、角色和权限管理"><a href="#RabbitMQ管理用户、角色和权限管理" class="headerlink" title="RabbitMQ管理用户、角色和权限管理"></a>RabbitMQ管理用户、角色和权限管理</h1><p>1、用户管理语法<br>添加用户：rabbitmqctl add_user {username} {password}<br>删除用户：rabbitmqctl delete_user {username}<br>修改密码：rabbitmqctl change_password {username} {newpassword} </p>
+<p>2、角色权限分配<br> 设置用户角色语法：rabbitmqctl set_user_tags {username} {tag}<br>RabbitMQ的tag用户角色分类：none、management、policymaker、monitoring、administrator<br>tag常用角色为：administrator, monitoring, management </p>
+<h3 id="RabbitMQ各类角色描述："><a href="#RabbitMQ各类角色描述：" class="headerlink" title="RabbitMQ各类角色描述："></a>RabbitMQ各类角色描述：</h3><p>（1）、none角色权限 ：不能访问 management plugin<br>（2）、management角色权限：<br>列出自己可以通过AMQP登入的virtual hosts<br>查看自己的virtual hosts中的queues, exchanges 和 bindings<br>查看和关闭自己的channels 和 connections<br>查看有关自己的virtual hosts的“全局”的统计信息，包含其他用户在这些virtual hosts中的活动。</p>
+<p>（3）、policymaker角色权限   #policymaker  [&#039;pɒləsɪmeɪkə(r)]  决策者<br>拥有management的所有权限，还拥有查看、创建和删除自己的virtual hosts所属的policies（策略）和parameters（[pəˈræmɪtə(r)] 参数 ）<br>（4）、monitoring 角色权限<br>拥有management的所有权限，还拥有：<br>列出所有virtual hosts，包括他们不能登录的virtual hosts<br>查看其他用户的connections和channels<br>查看节点级别的数据如clustering和memory使用情况<br>查看真正的关于所有virtual hosts的全局的统计信息<br>（5）、administrator角色权限<br>拥有policymaker和monitoring的所有权限，还拥有：<br>创建和删除virtual hosts<br>查看、创建和删除users<br>查看创建和删除permissions<br>关闭其他用户的connections</p>
+<p>TODO</p>
+<h1 id="使用python调用rabbitmq服务器"><a href="#使用python调用rabbitmq服务器" class="headerlink" title="使用python调用rabbitmq服务器"></a>使用python调用rabbitmq服务器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pika    #安装pika模块。python用pika模块调用rabbitmq。</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong> rabbitmq本质是一个生产者和消费者的模型结构。生产者-&gt;rabbitmq-&gt;消费者，即生产者产生消息，给到rabbitmq存储，消费者从rabbitmq中读取数据。</p>
+<p>创建生产者代码send.py </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import pika</span><br><span class="line"></span><br><span class="line">#启用对库进行阻塞，同步操作以进行简单的使用</span><br><span class="line"># 连接队列到服务器</span><br><span class="line">#这里可以连接远程IP，请记得打开远程端口 </span><br><span class="line">connection = pika.BlockingConnection(pika.ConnectionParameters(</span><br><span class="line">        host=&amp;#039;localhost&amp;#039;))</span><br><span class="line">#声明一个管道</span><br><span class="line">channel = connection.channel()</span><br><span class="line"># 创建队列。有就不管，没有就自动创建</span><br><span class="line">#声明一个队列，生产者和消费者都要声明一个相同的队列，用来防止万一某一方挂了，另一方能正常运行</span><br><span class="line">channel.queue_declare(queue=&amp;#039;hello&amp;#039;)</span><br><span class="line"></span><br><span class="line"># 使用默认的交换机发送信息。exchange为空就使用默认的</span><br><span class="line">channel.basic_publish(exchange=&amp;#039;&amp;#039;,</span><br><span class="line">                      routing_key=&amp;#039;hello&amp;#039;,</span><br><span class="line"> # queue名字 #路由键，写明将消息发往哪个队列，本例是将消息发往队列hello</span><br><span class="line">                      body=&amp;#039;Hello World!&amp;#039;)</span><br><span class="line">  # 消息内容</span><br><span class="line">print(&amp;quot; [x] Sent &amp;#039;Hello World!&amp;#039;&amp;quot;)</span><br><span class="line">connection.close()</span><br><span class="line"></span><br><span class="line">注：declare  [dɪˈkleə(r)]  声明  ； consuming [kənˈsju:mɪŋ]  消费；publish  [ˈpʌblɪʃ]  颁布</span><br></pre></td></tr></table></figure>
+<p>创建消耗者代码receive.py </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import pika</span><br><span class="line"></span><br><span class="line"># 连接服务器</span><br><span class="line">connection = pika.BlockingConnection(pika.ConnectionParameters(</span><br><span class="line">        host=&amp;#039;localhost&amp;#039;))</span><br><span class="line">channel = connection.channel()</span><br><span class="line"></span><br><span class="line"># rabbitmq消费端仍然使用此方法创建队列。这样做的意思是：若没有就创建，和发送端道理一样。目的是为了保证队列一定会有</span><br><span class="line">channel.queue_declare(queue=&amp;#039;hello&amp;#039;)</span><br><span class="line"></span><br><span class="line"># 收到消息后的回调</span><br><span class="line">def callback(ch, method, properties, body):</span><br><span class="line">    print(&amp;quot; [x] Received %r&amp;quot; % body)</span><br><span class="line"></span><br><span class="line">channel.basic_consume(callback,</span><br><span class="line"> #回调函数。执行结束后立即执行另外一个函数返回给发送端是否执行完毕。</span><br><span class="line">                      queue=&amp;#039;hello&amp;#039;,</span><br><span class="line">                      no_ack=True)</span><br><span class="line"> #不会告知服务端我是否收到消息。一般注释。#如果注释掉，对方没有收到消息的话不会将消息丢失，始终在队列里等待下次发送。</span><br><span class="line"></span><br><span class="line">print(&amp;#039; [*] Waiting for messages. To exit press CTRL+C&amp;#039;)</span><br><span class="line">channel.start_consuming()</span><br></pre></td></tr></table></figure>
+<h2 id="开始测试队列"><a href="#开始测试队列" class="headerlink" title="开始测试队列"></a>开始测试队列</h2><p>python send.py   #此命令执行两次，产生两个名字叫hello的消息<br>rabbitmqctl list_queues  #查看消息队列为2</p>
+<p>在web界面查看消息队列，发现在2个消息队列等待处理：<br> python receive.py   #消费或处理这2个消息<br>rabbitmqctl list_queues   #查看队列，已经为0<br>在web界面，查看队列，也为0了</p>
+<p>消息被消费后，队列就相应的移除</p>
+<h1 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h1><p>消息实际上投递到的是交换机，具体路由到那个队列由交换机根据路由键(routing key)完成。</p>
+<p>当你发消息到代理服务器时，即便路由键是空的，RabbitMQ也会将其和使用的路由键进行匹配。如果路由的消息不匹配任何绑定模式，消息将会进入黑洞。<br>交换机在队列与消息中间起到了中间层的作用，有了交换机我们可以实现更灵活的功能，RabbitMQ中有三种常用的交换机类型：</p>
+<p>direct: 如果路由键匹配，消息就投递到对应的队列<br>fanout：投递消息给所有绑定在当前交换机上面的队列<br>topic：允许实现有趣的消息通信场景，使得5不同源头的消息能够达到同一个队列。topic队列名称有两个特殊的关键字。</p>
+<ul>
+<li>可以替换一个单词<br>可以替换所有的单词<br>：<br>可以理解，direct为1v1, fanout为1v所有，topic比较灵活，可以1v任意。</li>
+</ul>
+<p><img src="https://box.kancloud.cn/4cfe6f43c82a483a889652f5a4e9f1c1_720x438.png" alt=""></p>
+<h1 id="虚拟主机"><a href="#虚拟主机" class="headerlink" title="虚拟主机"></a>虚拟主机</h1><p>每一个虚拟主机(vhost)相当于mini版的RabbitMQ服务器，拥有自己的队列，交换机和绑定，权限… 这使得一个RabbitMQ服务众多的应用程序，而不会互相冲突。</p>
+<p>rabbitMQ默认的虚拟主机为: “/” ，一般我们在创建Rabbit的用户时会再给用户分配一个虚拟主机。</p>
+<h1 id="消息投递策略"><a href="#消息投递策略" class="headerlink" title="消息投递策略"></a>消息投递策略</h1><p>默认情况下RabbitMQ的队列和交换机在RabbitMQ服务器重启之后会消失，原因在于队列和交换机的durable属性，该属性默认情况下为false.</p>
+<p>能从AMQP服务器崩溃中恢复的消息称为持久化消息，如果想要从崩溃中恢复那么消息必须</p>
+<ul>
+<li>投递模式设置2，来标记消息为持久化</li>
+<li>发送到持久化的交换机</li>
+<li>到到持久化的队列<br>缺点：消息写入磁盘性能差很多</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/rabbitmq/" rel="tag"># rabbitmq</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/21/消息队列/" rel="next" title="消息队列">
+                <i class="fa fa-chevron-left"></i> 消息队列
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">李靖超</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/lijingchao0" title="GitHub &rarr; https://github.com/lijingchao0" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RabbitMQ概述和运行机制"><span class="nav-number">1.</span> <span class="nav-text">RabbitMQ概述和运行机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RabbitMQ概述"><span class="nav-number">2.</span> <span class="nav-text">RabbitMQ概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MQ实战场景："><span class="nav-number">2.1.</span> <span class="nav-text">MQ实战场景：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RabbitMQ-安装"><span class="nav-number">3.</span> <span class="nav-text">RabbitMQ 安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RabbitMQ使用方法"><span class="nav-number">4.</span> <span class="nav-text">RabbitMQ使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RabbitMQ的vhost管理"><span class="nav-number">4.1.</span> <span class="nav-text">RabbitMQ的vhost管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RabbitMQ管理用户、角色和权限管理"><span class="nav-number">5.</span> <span class="nav-text">RabbitMQ管理用户、角色和权限管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ各类角色描述："><span class="nav-number">5.0.1.</span> <span class="nav-text">RabbitMQ各类角色描述：</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#使用python调用rabbitmq服务器"><span class="nav-number">6.</span> <span class="nav-text">使用python调用rabbitmq服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始测试队列"><span class="nav-number">6.1.</span> <span class="nav-text">开始测试队列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#交换机"><span class="nav-number">7.</span> <span class="nav-text">交换机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟主机"><span class="nav-number">8.</span> <span class="nav-text">虚拟主机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#消息投递策略"><span class="nav-number">9.</span> <span class="nav-text">消息投递策略</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李靖超</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
