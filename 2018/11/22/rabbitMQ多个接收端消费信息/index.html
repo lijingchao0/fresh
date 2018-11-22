@@ -108,22 +108,22 @@
 
 
 
-  <meta name="description" content="本篇文章讲述rabbitMQ多个接收端消费信息 循环分发启动一个发送端往队列发消息，此时启动多个接收端。发送的消息会对接收端一个一个挨着发送消息。 这就是默认情况下，多个接收端轮流消费消息。队列发送给消费端后，就立即删除。那么问题来了，当某个消费者在处理消息的时候，异常终止了怎么办？此时，我们更希望这样：若是那个消费者挂掉了，消息自动转给另一个消费者处理。 幸好，rabbitmq就有效确认机制。">
+  <meta name="description" content="本篇文章讲述rabbitMQ多个接收端消费信息">
 <meta name="keywords" content="rabbitmq">
 <meta property="og:type" content="article">
 <meta property="og:title" content="rabbitMQ多个接收端消费信息(搬运)">
 <meta property="og:url" content="http://yoursite.com/2018/11/22/rabbitMQ多个接收端消费信息/index.html">
 <meta property="og:site_name" content="李靖超的博客">
-<meta property="og:description" content="本篇文章讲述rabbitMQ多个接收端消费信息 循环分发启动一个发送端往队列发消息，此时启动多个接收端。发送的消息会对接收端一个一个挨着发送消息。 这就是默认情况下，多个接收端轮流消费消息。队列发送给消费端后，就立即删除。那么问题来了，当某个消费者在处理消息的时候，异常终止了怎么办？此时，我们更希望这样：若是那个消费者挂掉了，消息自动转给另一个消费者处理。 幸好，rabbitmq就有效确认机制。">
+<meta property="og:description" content="本篇文章讲述rabbitMQ多个接收端消费信息">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://box.kancloud.cn/0dfbb61885d91b32807858d2ea66e669_1584x709.png">
 <meta property="og:image" content="https://box.kancloud.cn/c967559388971bc1277b7021edfcf1c9_396x111.png">
 <meta property="og:image" content="https://box.kancloud.cn/65d418b54973525e03432d314234141d_423x171.png">
 <meta property="og:image" content="https://box.kancloud.cn/2e78d61bca855f6c743a3b7fe0e26eaf_576x200.png">
-<meta property="og:updated_time" content="2018-11-22T11:40:34.946Z">
+<meta property="og:updated_time" content="2018-11-22T11:42:12.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rabbitMQ多个接收端消费信息(搬运)">
-<meta name="twitter:description" content="本篇文章讲述rabbitMQ多个接收端消费信息 循环分发启动一个发送端往队列发消息，此时启动多个接收端。发送的消息会对接收端一个一个挨着发送消息。 这就是默认情况下，多个接收端轮流消费消息。队列发送给消费端后，就立即删除。那么问题来了，当某个消费者在处理消息的时候，异常终止了怎么办？此时，我们更希望这样：若是那个消费者挂掉了，消息自动转给另一个消费者处理。 幸好，rabbitmq就有效确认机制。">
+<meta name="twitter:description" content="本篇文章讲述rabbitMQ多个接收端消费信息">
 <meta name="twitter:image" content="https://box.kancloud.cn/0dfbb61885d91b32807858d2ea66e669_1584x709.png">
 
 
@@ -369,7 +369,7 @@
                 
               
 
-              <time title="创建时间：2018-11-22 09:05:11 / 修改时间：19:40:34" itemprop="dateCreated datePublished" datetime="2018-11-22T09:05:11+08:00">2018-11-22</time>
+              <time title="创建时间：2018-11-22 09:05:11 / 修改时间：19:42:12" itemprop="dateCreated datePublished" datetime="2018-11-22T09:05:11+08:00">2018-11-22</time>
             
 
             
@@ -407,8 +407,7 @@
       
 
       
-        <a id="more"></a>
-<p>本篇文章讲述rabbitMQ多个接收端消费信息</p>
+        <p>本篇文章讲述rabbitMQ多个接收端消费信息<br><a id="more"></a></p>
 <h1 id="循环分发"><a href="#循环分发" class="headerlink" title="循环分发"></a>循环分发</h1><p>启动一个发送端往队列发消息，此时启动多个接收端。发送的消息会对接收端一个一个挨着发送消息。<br><img src="https://box.kancloud.cn/0dfbb61885d91b32807858d2ea66e669_1584x709.png" alt=""></p>
 <p>这就是默认情况下，多个接收端轮流消费消息。队列发送给消费端后，就立即删除。那么问题来了，当某个消费者在处理消息的时候，异常终止了怎么办？此时，我们更希望这样：若是那个消费者挂掉了，消息自动转给另一个消费者处理。</p>
 <p>幸好，rabbitmq就有效确认机制。消费者收到消息后，正常处理完成，此时才通知队列可以自由删除。那么问题又来了，消费者挂掉了连确认消息都发不出，该怎么办？rabbitmq维持了消费者的连接信息。消费者挂掉，与server的连接通道会关闭或tcp连接丢失。这时server知道了这个情况，就自动重发消息。</p>
